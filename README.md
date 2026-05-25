@@ -10,7 +10,6 @@ atrodytų kaip realus pirmo kurso komandinis darbas, kodas padalintas į tris
 dalis. Kiekvienas komandos narys turi po 2 pagrindines funkcijas ir maždaug
 panašų kiekį kodo.
 
-Eligijus
 Eligijus atsakingas už slaptažodžio generavimo logiką.
 
 Jo funkcijos kode:
@@ -23,7 +22,7 @@ random generavimą pakeitė į saugesnį secrets;
 pridėjo tikrinimą, ar pasirinkta bent viena simbolių grupė;
 padarė, kad slaptažodyje būtų bent vienas simbolis iš kiekvienos pasirinktos grupės;
 pridėjo klaidų tikrinimą, jei vartotojas įveda netinkamą ilgį.
-Tomas
+
 Tomas atsakingas už programos langą, išdėstymą ir dizainą.
 
 Jo funkcijos kode:
@@ -36,7 +35,7 @@ pradinį šviesų dizainą pakeitė į tamsų cyber / hacker stilių;
 pridėjo žalią terminalo tipo tekstą;
 sukūrė aiškų išdėstymą su nustatymais, rezultatu ir istorija;
 pasirūpino, kad programa atrodytų tvarkingai, bet kodas nebūtų per sudėtingas.
-Matas
+
 Matas atsakingas už papildomas funkcijas.
 
 Jo funkcijos kode:
