@@ -27,7 +27,7 @@ pridėjo klaidų tikrinimą, jei vartotojas įveda netinkamą ilgį.
 
 
 Tomas
-Tatsakingas už programos langą, išdėstymą ir dizainą.
+atsakingas už programos langą, išdėstymą ir dizainą.
 
 Jo funkcijos kode:
 
