@@ -2,9 +2,8 @@ GitHub PassGen.py kodo modifikavimo vietos
 Pradiniu kodu laikomas GitHub failas:
 https://github.com/Aewass/Python-Password-Generator-w-TKinter-GUI/blob/master/PassGen.py
 
-Mūsų main.py yra mokomoji šio kodo versija. Ji vis dar turi tamsų hacker
-stilių, bet kodas padalintas į tris komandos dalis, kad kiekvienas žmogus
-turėtų maždaug panašų kiekį darbo ir po 2 pagrindines funkcijas.
+Mūsų main.py yra mokomoji šio kodo versija. Ji turi tamsų hacker stilių,
+saugesnį slaptažodžių generavimą, istoriją ir fullscreen režimą.
 
 1. Importai
 GitHub kode buvo:
@@ -24,16 +23,11 @@ pyperclip pašalintas, nes kopijavimui naudojama tkinter iškarpinė;
 datetime naudojamas istorijos laikui;
 Path naudojamas istorijos failui išsaugoti.
 2. Kodo padalinimas pagal roles
-Pradiniame GitHub faile visas kodas buvo viename bendrame faile be aiškaus
-komandinio pasidalinimo.
-
 Mūsų kode pridėtos trys dalys:
 
 ELIGIJAUS DALIS - generavimo logika;
 MATO DALIS - stiprumas, istorija, kopijavimas ir failas;
-TOMO DALIS - langas, išdėstymas ir dizainas.
-Kiekviena dalis turi po 2 pagrindines funkcijas.
-
+TOMO DALIS - langas, išdėstymas, dizainas ir fullscreen režimas.
 3. Eligijaus pakeitimai
 Pridėtos funkcijos:
 
@@ -60,15 +54,13 @@ istoriją galima išvalyti.
 5. Tomo pakeitimai
 Pridėtos funkcijos:
 
+toggle_fullscreen();
 create_window();
 create_interface().
 Pakeitimai:
 
-langas padarytas didesnis ir patogesnis;
-sukurtas tamsus cyber / hacker stilius;
-pridėti aiškūs mygtukai, įvesties laukai ir istorijos langas;
-dizainas išlaikytas paprastas, kad kodą būtų galima paaiškinti per pristatymą.
-6. Galutinis rezultatas
-main.py yra aiškiai padalintas komandinis projektas. Jis patobulina GitHub
-PassGen.py, bet išlieka suprantamas pirmo kurso studentams: nėra sudėtingų
-klasių, papildomų bibliotekų ar per daug profesionalios struktūros.
+langas padarytas didesnis, kad istorijos sąrašas būtų matomas;
+programa leidžia langą didinti;
+pridėtas fullscreen mygtukas;
+pridėtas F11 klavišas fullscreen režimui įjungti arba išjungti;
+sukurtas tamsus cyber / hacker stilius.
