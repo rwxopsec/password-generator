@@ -37,6 +37,10 @@ pridėjo žalią terminalo tipo tekstą;
 sukūrė aiškų išdėstymą su nustatymais, rezultatu ir istorija;
 padidino langą, kad istorija būtų matoma;
 pridėjo fullscreen mygtuką ir F11 klavišo veikimą.
+
+
+
+
 Matas
 atsakingas už papildomas funkcijas.
 
