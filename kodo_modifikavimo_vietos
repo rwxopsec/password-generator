@@ -1,1 +1,74 @@
+GitHub PassGen.py kodo modifikavimo vietos
+Pradiniu kodu laikomas GitHub failas:
+https://github.com/Aewass/Python-Password-Generator-w-TKinter-GUI/blob/master/PassGen.py
 
+Mūsų main.py yra mokomoji šio kodo versija. Ji vis dar turi tamsų hacker
+stilių, bet kodas padalintas į tris komandos dalis, kad kiekvienas žmogus
+turėtų maždaug panašų kiekį darbo ir po 2 pagrindines funkcijas.
+
+1. Importai
+GitHub kode buvo:
+
+import random, string
+import pyperclip
+Mūsų kode pakeista į:
+
+import secrets
+import string
+from datetime import datetime
+from pathlib import Path
+Kodėl:
+
+secrets geriau tinka slaptažodžiams nei random;
+pyperclip pašalintas, nes kopijavimui naudojama tkinter iškarpinė;
+datetime naudojamas istorijos laikui;
+Path naudojamas istorijos failui išsaugoti.
+2. Kodo padalinimas pagal roles
+Pradiniame GitHub faile visas kodas buvo viename bendrame faile be aiškaus
+komandinio pasidalinimo.
+
+Mūsų kode pridėtos trys dalys:
+
+ELIGIJAUS DALIS - generavimo logika;
+MATO DALIS - stiprumas, istorija, kopijavimas ir failas;
+TOMO DALIS - langas, išdėstymas ir dizainas.
+Kiekviena dalis turi po 2 pagrindines funkcijas.
+
+3. Eligijaus pakeitimai
+Pridėtos funkcijos:
+
+get_selected_characters();
+generate_password().
+Pakeitimai:
+
+slaptažodžiai generuojami su secrets;
+vartotojas gali pasirinkti raides, skaičius ir simbolius;
+programa patikrina, ar įvestas ilgis tinkamas;
+į slaptažodį įdedamas bent vienas simbolis iš kiekvienos pasirinktos grupės.
+4. Mato pakeitimai
+Pridėtos funkcijos:
+
+check_strength();
+password_actions().
+Pakeitimai:
+
+slaptažodis įvertinamas kaip silpnas, vidutinis arba stiprus;
+sugeneruoti slaptažodžiai įrašomi į istoriją;
+slaptažodį galima kopijuoti;
+istoriją galima išsaugoti į failą;
+istoriją galima išvalyti.
+5. Tomo pakeitimai
+Pridėtos funkcijos:
+
+create_window();
+create_interface().
+Pakeitimai:
+
+langas padarytas didesnis ir patogesnis;
+sukurtas tamsus cyber / hacker stilius;
+pridėti aiškūs mygtukai, įvesties laukai ir istorijos langas;
+dizainas išlaikytas paprastas, kad kodą būtų galima paaiškinti per pristatymą.
+6. Galutinis rezultatas
+main.py yra aiškiai padalintas komandinis projektas. Jis patobulina GitHub
+PassGen.py, bet išlieka suprantamas pirmo kurso studentams: nėra sudėtingų
+klasių, papildomų bibliotekų ar per daug profesionalios struktūros.
