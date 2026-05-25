@@ -1,0 +1,219 @@
+from tkinter import *
+from tkinter import messagebox
+import secrets
+import string
+from datetime import datetime
+from pathlib import Path
+
+
+# Bendri projekto nustatymai
+SYMBOLS = "!@#$%^&*()_-+=[]{}|:;<>,.?/"
+history = []
+
+BLACK = "#050505"
+DARK = "#101915"
+DARKER = "#07100c"
+GREEN = "#00ff88"
+BLUE = "#00ccff"
+WHITE = "#d9ffe9"
+GRAY = "#7fa890"
+RED = "#ff4d6d"
+
+
+# ============================================================
+# ELIGIJAUS DALIS
+# Atsakingas už slaptažodžio generavimo logiką.
+# Funkcijos: get_selected_characters() ir generate_password()
+# ============================================================
+
+def get_selected_characters():
+    chars = ""
+    required_chars = []
+
+    if letters_var.get():
+        chars += string.ascii_letters
+        required_chars.append(secrets.choice(string.ascii_lowercase))
+        required_chars.append(secrets.choice(string.ascii_uppercase))
+
+    if numbers_var.get():
+        chars += string.digits
+        required_chars.append(secrets.choice(string.digits))
+
+    if symbols_var.get():
+        chars += SYMBOLS
+        required_chars.append(secrets.choice(SYMBOLS))
+
+    return chars, required_chars
+
+
+def generate_password():
+    try:
+        length = int(length_box.get())
+    except ValueError:
+        messagebox.showwarning("Klaida", "Ilgis turi būti skaičius.")
+        return
+
+    chars, required_chars = get_selected_characters()
+
+    if chars == "":
+        messagebox.showwarning("Klaida", "Pasirink bent vieną simbolių grupę.")
+        return
+
+    if length < 4:
+        messagebox.showwarning("Klaida", "Slaptažodis turi būti bent 4 simbolių ilgio.")
+        return
+
+    if length < len(required_chars):
+        messagebox.showwarning("Klaida", "Ilgis per trumpas pasirinktiems nustatymams.")
+        return
+
+    password_list = required_chars.copy()
+
+    while len(password_list) < length:
+        password_list.append(secrets.choice(chars))
+
+    secrets.SystemRandom().shuffle(password_list)
+    password = "".join(password_list)
+
+    password_var.set(password)
+    strength = check_strength(password)
+    strength_label.config(text=f"Stiprumas: {strength}")
+    password_actions("add", password, strength)
+    status_label.config(text="Slaptažodis sugeneruotas.", fg=GREEN)
+
+
+# ============================================================
+# MATO DALIS
+# Atsakingas už stiprumo tikrinimą, istoriją, kopijavimą ir failą.
+# Funkcijos: check_strength() ir password_actions()
+# ============================================================
+
+def check_strength(password):
+    score = 0
+
+    if len(password) >= 8:
+        score += 1
+    if len(password) >= 12:
+        score += 1
+    if any(char.islower() for char in password):
+        score += 1
+    if any(char.isupper() for char in password):
+        score += 1
+    if any(char.isdigit() for char in password):
+        score += 1
+    if any(char in SYMBOLS for char in password):
+        score += 1
+
+    if score <= 2:
+        strength_label.config(fg=RED)
+        return "Silpnas"
+
+    if score <= 4:
+        strength_label.config(fg=BLUE)
+        return "Vidutinis"
+
+    strength_label.config(fg=GREEN)
+    return "Stiprus"
+
+
+def password_actions(action, password="", strength=""):
+    if action == "add":
+        time = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        history.append(f"{time} | {strength} | {password}")
+
+    elif action == "copy":
+        password = password_var.get()
+
+        if password == "":
+            messagebox.showwarning("Klaida", "Pirmiausia sugeneruok slaptažodį.")
+            return
+
+        root.clipboard_clear()
+        root.clipboard_append(password)
+        root.update()
+        status_label.config(text="Slaptažodis nukopijuotas.", fg=GREEN)
+
+    elif action == "save":
+        if len(history) == 0:
+            messagebox.showwarning("Klaida", "Istorija tuščia.")
+            return
+
+        file_path = Path(__file__).with_name("slaptazodziu_istorija.txt")
+        file_path.write_text("\n".join(history), encoding="utf-8")
+        status_label.config(text="Istorija išsaugota faile.", fg=GREEN)
+        messagebox.showinfo("Išsaugota", f"Istorija išsaugota:\n{file_path}")
+
+    elif action == "clear":
+        history.clear()
+        status_label.config(text="Istorija išvalyta.", fg=GRAY)
+
+    history_list.delete(0, END)
+    for item in reversed(history[-10:]):
+        history_list.insert(END, item)
+
+
+# ============================================================
+# TOMO DALIS
+# Atsakingas už langą, išdėstymą ir tamsų hacker stiliaus dizainą.
+# Funkcijos: create_window() ir create_interface()
+# ============================================================
+
+def create_window():
+    app = Tk()
+    app.title("Advanced Password Generator")
+    app.geometry("650x540")
+    app.configure(bg=BLACK)
+    app.resizable(False, False)
+    return app
+
+
+def create_interface():
+    global length_box, password_var, letters_var, numbers_var, symbols_var
+    global strength_label, status_label, history_list
+
+    password_var = StringVar()
+    letters_var = BooleanVar(value=True)
+    numbers_var = BooleanVar(value=True)
+    symbols_var = BooleanVar(value=True)
+
+    Label(root, text="> ADVANCED PASSWORD GENERATOR", bg=BLACK, fg=GREEN, font=("Consolas", 18, "bold")).pack(pady=(18, 5))
+    Label(root, text="Cyber security student project", bg=BLACK, fg=GRAY, font=("Consolas", 10)).pack(pady=(0, 15))
+    main_frame = Frame(root, bg=DARK, padx=20, pady=20)
+    main_frame.pack(padx=25, pady=10, fill=BOTH, expand=True)
+
+    Label(main_frame, text="Slaptažodžio ilgis:", bg=DARK, fg=WHITE, font=("Consolas", 11)).pack(anchor=W)
+
+    length_box = Spinbox(main_frame, from_=4, to=64, width=10, bg=DARKER, fg=GREEN, insertbackground=GREEN, font=("Consolas", 12))
+    length_box.delete(0, END)
+    length_box.insert(0, "12")
+    length_box.pack(anchor=W, pady=(5, 15))
+
+    Label(main_frame, text="Naudoti:", bg=DARK, fg=WHITE, font=("Consolas", 11)).pack(anchor=W)
+    Checkbutton(main_frame, text="Raidės A-Z / a-z", variable=letters_var, bg=DARK, fg=WHITE, selectcolor=DARKER).pack(anchor=W)
+    Checkbutton(main_frame, text="Skaičiai 0-9", variable=numbers_var, bg=DARK, fg=WHITE, selectcolor=DARKER).pack(anchor=W)
+    Checkbutton(main_frame, text="Simboliai !@#$", variable=symbols_var, bg=DARK, fg=WHITE, selectcolor=DARKER).pack(anchor=W)
+
+    Button(main_frame, text="GENERUOTI", command=generate_password, bg=GREEN, fg=BLACK, font=("Consolas", 12, "bold"), width=20).pack(pady=18)
+    Entry(main_frame, textvariable=password_var, bg=DARKER, fg=GREEN, insertbackground=GREEN, font=("Consolas", 14), justify=CENTER, width=45).pack(pady=(0, 8))
+
+    strength_label = Label(main_frame, text="Stiprumas: -", bg=DARK, fg=BLUE, font=("Consolas", 11, "bold"))
+    strength_label.pack()
+
+    button_frame = Frame(main_frame, bg=DARK)
+    button_frame.pack(pady=12)
+
+    Button(button_frame, text="Kopijuoti", command=lambda: password_actions("copy"), bg=DARKER, fg=WHITE, width=15).pack(side=LEFT, padx=5)
+    Button(button_frame, text="Išsaugoti", command=lambda: password_actions("save"), bg=DARKER, fg=WHITE, width=15).pack(side=LEFT, padx=5)
+    Button(button_frame, text="Išvalyti", command=lambda: password_actions("clear"), bg=DARKER, fg=WHITE, width=15).pack(side=LEFT, padx=5)
+
+    Label(main_frame, text="Istorija:", bg=DARK, fg=WHITE, font=("Consolas", 11)).pack(anchor=W, pady=(8, 5))
+    history_list = Listbox(main_frame, bg=DARKER, fg=GREEN, font=("Consolas", 9), height=7, width=75)
+    history_list.pack()
+
+    status_label = Label(main_frame, text="Pasirink nustatymus ir spausk GENERUOTI.", bg=DARK, fg=GRAY, font=("Consolas", 9))
+    status_label.pack(pady=(10, 0))
+
+
+root = create_window()
+create_interface()
+root.mainloop()
