@@ -22,6 +22,10 @@ random generavimą pakeitė į saugesnį secrets;
 pridėjo tikrinimą, ar pasirinkta bent viena simbolių grupė;
 padarė, kad slaptažodyje būtų bent vienas simbolis iš kiekvienos pasirinktos grupės;
 pridėjo klaidų tikrinimą, jei vartotojas įveda netinkamą ilgį.
+
+
+
+
 Tomas
 Tatsakingas už programos langą, išdėstymą ir dizainą.
 
