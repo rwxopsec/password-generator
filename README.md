@@ -52,9 +52,3 @@ pridėjo istorijos išvalymą.
 Kodo pasidalinimo logika
 Kode yra trys aiškiai pažymėtos dalys:
 
-ELIGIJAUS DALIS;
-MATO DALIS;
-TOMO DALIS.
-Taip per pristatymą galima lengvai parodyti, kuris komandos narys už ką buvo
-atsakingas. Kiekviena dalis turi po 2 pagrindines funkcijas, todėl darbas
-atrodo tolygiai padalintas.
