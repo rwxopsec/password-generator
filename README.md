@@ -7,10 +7,10 @@ Nuoroda: https://github.com/Aewass/Python-Password-Generator-w-TKinter-GUI/blob/
 Bendras tikslas
 Patobulinti slaptažodžių generatorių su tkinter grafine sąsaja. Kad projektas
 atrodytų kaip realus pirmo kurso komandinis darbas, kodas padalintas į tris
-dalis. Kiekvienas komandos narys turi po 2 pagrindines funkcijas ir maždaug
-panašų kiekį kodo.
+dalis. Kiekvienas komandos narys turi savo aiškiai pažymėtą kodo dalį.
 
-Eligijus atsakingas už slaptažodžio generavimo logiką.
+Eligijus
+atsakingas už slaptažodžio generavimo logiką.
 
 Jo funkcijos kode:
 
@@ -22,11 +22,12 @@ random generavimą pakeitė į saugesnį secrets;
 pridėjo tikrinimą, ar pasirinkta bent viena simbolių grupė;
 padarė, kad slaptažodyje būtų bent vienas simbolis iš kiekvienos pasirinktos grupės;
 pridėjo klaidų tikrinimą, jei vartotojas įveda netinkamą ilgį.
-
-Tomas atsakingas už programos langą, išdėstymą ir dizainą.
+Tomas
+Tatsakingas už programos langą, išdėstymą ir dizainą.
 
 Jo funkcijos kode:
 
+toggle_fullscreen() - įjungia arba išjungia fullscreen režimą;
 create_window() - sukuria pagrindinį programos langą;
 create_interface() - sudeda tekstus, įvesties laukus, mygtukus, istorijos sąrašą ir tamsų dizainą.
 Ką jis keitė:
@@ -34,9 +35,10 @@ Ką jis keitė:
 pradinį šviesų dizainą pakeitė į tamsų cyber / hacker stilių;
 pridėjo žalią terminalo tipo tekstą;
 sukūrė aiškų išdėstymą su nustatymais, rezultatu ir istorija;
-pasirūpino, kad programa atrodytų tvarkingai, bet kodas nebūtų per sudėtingas.
-
-Matas atsakingas už papildomas funkcijas.
+padidino langą, kad istorija būtų matoma;
+pridėjo fullscreen mygtuką ir F11 klavišo veikimą.
+Matas
+atsakingas už papildomas funkcijas.
 
 Jo funkcijos kode:
 
@@ -49,6 +51,3 @@ pridėjo slaptažodžių istoriją;
 pridėjo kopijavimą į iškarpinę;
 pridėjo istorijos išsaugojimą į failą slaptazodziu_istorija.txt;
 pridėjo istorijos išvalymą.
-Kodo pasidalinimo logika
-Kode yra trys aiškiai pažymėtos dalys:
-
