@@ -18,6 +18,7 @@ BLUE = "#00ccff"
 WHITE = "#d9ffe9"
 GRAY = "#7fa890"
 RED = "#ff4d6d"
+is_fullscreen = False
 
 
 # ============================================================
@@ -155,15 +156,28 @@ def password_actions(action, password="", strength=""):
 # ============================================================
 # TOMO DALIS
 # Atsakingas už langą, išdėstymą ir tamsų hacker stiliaus dizainą.
-# Funkcijos: create_window() ir create_interface()
+# Funkcijos: toggle_fullscreen(), create_window() ir create_interface()
 # ============================================================
+
+def toggle_fullscreen():
+    global is_fullscreen
+
+    is_fullscreen = not is_fullscreen
+    root.attributes("-fullscreen", is_fullscreen)
+
+    if is_fullscreen:
+        status_label.config(text="Fullscreen režimas įjungtas. Spausk F11, kad išjungtum.", fg=GREEN)
+    else:
+        status_label.config(text="Fullscreen režimas išjungtas.", fg=GRAY)
+
 
 def create_window():
     app = Tk()
     app.title("Advanced Password Generator")
-    app.geometry("650x540")
+    app.geometry("720x650")
     app.configure(bg=BLACK)
-    app.resizable(False, False)
+    app.resizable(True, True)
+    app.bind("<F11>", lambda event: toggle_fullscreen())
     return app
 
 
@@ -202,13 +216,14 @@ def create_interface():
     button_frame = Frame(main_frame, bg=DARK)
     button_frame.pack(pady=12)
 
-    Button(button_frame, text="Kopijuoti", command=lambda: password_actions("copy"), bg=DARKER, fg=WHITE, width=15).pack(side=LEFT, padx=5)
-    Button(button_frame, text="Išsaugoti", command=lambda: password_actions("save"), bg=DARKER, fg=WHITE, width=15).pack(side=LEFT, padx=5)
-    Button(button_frame, text="Išvalyti", command=lambda: password_actions("clear"), bg=DARKER, fg=WHITE, width=15).pack(side=LEFT, padx=5)
+    Button(button_frame, text="Kopijuoti", command=lambda: password_actions("copy"), bg=DARKER, fg=WHITE, width=13).pack(side=LEFT, padx=4)
+    Button(button_frame, text="Išsaugoti", command=lambda: password_actions("save"), bg=DARKER, fg=WHITE, width=13).pack(side=LEFT, padx=4)
+    Button(button_frame, text="Išvalyti", command=lambda: password_actions("clear"), bg=DARKER, fg=WHITE, width=13).pack(side=LEFT, padx=4)
+    Button(button_frame, text="Fullscreen", command=toggle_fullscreen, bg=DARKER, fg=WHITE, width=13).pack(side=LEFT, padx=4)
 
     Label(main_frame, text="Istorija:", bg=DARK, fg=WHITE, font=("Consolas", 11)).pack(anchor=W, pady=(8, 5))
-    history_list = Listbox(main_frame, bg=DARKER, fg=GREEN, font=("Consolas", 9), height=7, width=75)
-    history_list.pack()
+    history_list = Listbox(main_frame, bg=DARKER, fg=GREEN, font=("Consolas", 9), height=9, width=75)
+    history_list.pack(fill=BOTH, expand=True)
 
     status_label = Label(main_frame, text="Pasirink nustatymus ir spausk GENERUOTI.", bg=DARK, fg=GRAY, font=("Consolas", 9))
     status_label.pack(pady=(10, 0))
