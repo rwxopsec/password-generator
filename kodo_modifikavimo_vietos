@@ -1,66 +1,168 @@
-GitHub PassGen.py kodo modifikavimo vietos
-Pradiniu kodu laikomas GitHub failas:
-https://github.com/Aewass/Python-Password-Generator-w-TKinter-GUI/blob/master/PassGen.py
+# Code Modification Summary
 
-Mūsų main.py yra mokomoji šio kodo versija. Ji turi tamsų hacker stilių,
-saugesnį slaptažodžių generavimą, istoriją ir fullscreen režimą.
+This document explains which parts of the original `PassGen.py` project were modified and how our version improved the password generator.
 
-1. Importai
-GitHub kode buvo:
+## 🔗 Original Source
 
-import random, string
+Original project: **Python Password Generator with Tkinter GUI**  
+Source file: [PassGen.py](https://github.com/Aewass/Python-Password-Generator-w-TKinter-GUI/blob/master/PassGen.py)
+
+## 📌 Project Overview
+
+Our `main.py` is an improved educational version of the original password generator.  
+The updated version includes a darker cybersecurity-themed interface, more secure password generation, password history, password strength evaluation, and fullscreen support.
+
+---
+
+## 1. Imports
+
+### Original Code
+
+```python
+import random
+import string
 import pyperclip
-Mūsų kode pakeista į:
+```
 
+### Modified Code
+
+```python
 import secrets
 import string
 from datetime import datetime
 from pathlib import Path
-Kodėl:
+```
 
-secrets geriau tinka slaptažodžiams nei random;
-pyperclip pašalintas, nes kopijavimui naudojama tkinter iškarpinė;
-datetime naudojamas istorijos laikui;
-Path naudojamas istorijos failui išsaugoti.
-2. Kodo padalinimas pagal roles
-Mūsų kode pridėtos trys dalys:
+### Reason for Changes
 
-ELIGIJAUS DALIS - generavimo logika;
-MATO DALIS - stiprumas, istorija, kopijavimas ir failas;
-TOMO DALIS - langas, išdėstymas, dizainas ir fullscreen režimas.
-3. Eligijaus pakeitimai
-Pridėtos funkcijos:
+- Replaced `random` with `secrets` because `secrets` is better suited for generating passwords and security-related values.
+- Removed `pyperclip` because copying is handled through Tkinter’s built-in clipboard functionality.
+- Added `datetime` to store password history entries with timestamps.
+- Added `Path` to manage the password history file in a cleaner and more reliable way.
 
-get_selected_characters();
-generate_password().
-Pakeitimai:
+---
 
-slaptažodžiai generuojami su secrets;
-vartotojas gali pasirinkti raides, skaičius ir simbolius;
-programa patikrina, ar įvestas ilgis tinkamas;
-į slaptažodį įdedamas bent vienas simbolis iš kiekvienos pasirinktos grupės.
-4. Mato pakeitimai
-Pridėtos funkcijos:
+## 2. Code Structure & Team Responsibilities
 
-check_strength();
-password_actions().
-Pakeitimai:
+The code was divided into three main sections based on team member responsibilities.
 
-slaptažodis įvertinamas kaip silpnas, vidutinis arba stiprus;
-sugeneruoti slaptažodžiai įrašomi į istoriją;
-slaptažodį galima kopijuoti;
-istoriją galima išsaugoti į failą;
-istoriją galima išvalyti.
-5. Tomo pakeitimai
-Pridėtos funkcijos:
+| Team Member | Responsibility |
+|---|---|
+| Eligijus | Password generation logic |
+| Matas | Password strength, history, copying, and file handling |
+| Tomas | Application window, layout, design, and fullscreen mode |
 
-toggle_fullscreen();
-create_window();
-create_interface().
-Pakeitimai:
+This structure made the project easier to understand, maintain, and present as a team project.
 
-langas padarytas didesnis, kad istorijos sąrašas būtų matomas;
-programa leidžia langą didinti;
-pridėtas fullscreen mygtukas;
-pridėtas F11 klavišas fullscreen režimui įjungti arba išjungti;
-sukurtas tamsus cyber / hacker stilius.
+---
+
+## 3. Eligijus — Password Generation Logic
+
+### Added / Modified Functions
+
+```python
+get_selected_characters()
+generate_password()
+```
+
+### Changes Made
+
+- Added logic to collect the character groups selected by the user.
+- Allowed the user to choose letters, numbers, and symbols.
+- Added input validation for password length.
+- Checked whether at least one character group was selected.
+- Ensured the generated password contains at least one character from every selected group.
+- Used the `secrets` module for more secure password generation.
+
+### Purpose
+
+These changes improved the security and reliability of the password generator.  
+Instead of simply generating a random string, the program now validates user choices and ensures that the generated password matches the selected requirements.
+
+---
+
+## 4. Matas — Additional Features
+
+### Added / Modified Functions
+
+```python
+check_strength()
+password_actions()
+```
+
+### Changes Made
+
+- Added password strength evaluation.
+- Classified generated passwords as weak, medium, or strong.
+- Added password history.
+- Added copy-to-clipboard functionality.
+- Added the ability to save password history to a text file.
+- Added the ability to clear password history.
+
+### Purpose
+
+These features made the program more useful for real users.  
+The user can now check password quality, reuse generated passwords from history, copy them easily, and save the history to a file.
+
+---
+
+## 5. Tomas — Interface, Design & Fullscreen Mode
+
+### Added / Modified Functions
+
+```python
+toggle_fullscreen()
+create_window()
+create_interface()
+```
+
+### Changes Made
+
+- Increased the main window size so the password history section is visible.
+- Added fullscreen mode.
+- Added `F11` keyboard support for enabling or disabling fullscreen mode.
+- Added a fullscreen button.
+- Changed the original light interface into a dark cyber / hacker-style design.
+- Improved the layout of settings, generated password output, and password history.
+- Used terminal-style green text to match the cybersecurity theme.
+
+### Purpose
+
+These changes improved the visual quality and usability of the program.  
+The interface became clearer, more modern, and more suitable for a cybersecurity-related project.
+
+---
+
+## ✅ Main Improvements Compared to the Original Project
+
+- More secure password generation using `secrets`
+- Better input validation
+- Character group selection
+- Password strength checking
+- Password history
+- Copy-to-clipboard support
+- Save history to a `.txt` file
+- Clear history option
+- Dark cybersecurity-themed GUI
+- Fullscreen mode
+- Improved team-based code organization
+
+---
+
+## 📁 History File
+
+Password history is saved to:
+
+```text
+slaptazodziu_istorija.txt
+```
+
+This file stores generated passwords and allows the user to keep a record of previously created passwords.
+
+---
+
+## 🧠 What This Project Demonstrates
+
+This project demonstrates basic Python GUI development, secure password generation, input validation, file handling, and teamwork.
+
+It also shows how an existing open-source project can be analyzed, modified, and improved with additional security-focused features.
